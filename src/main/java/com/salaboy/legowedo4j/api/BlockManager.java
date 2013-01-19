@@ -20,4 +20,8 @@ public interface BlockManager {
     public void write(byte[] data);
     
     public int read(byte[] buff);
+
+	public int getNumberOfHubs();
+
+	public boolean setHub(int hub);
 }

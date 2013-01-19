@@ -6,7 +6,6 @@ package com.salaboy.legowedo4j.impl;
 
 import com.salaboy.legowedo4j.api.BlockManager;
 import com.salaboy.legowedo4j.api.DistanceSensor;
-import javax.inject.Inject;
 
 /**
  *
@@ -14,11 +13,14 @@ import javax.inject.Inject;
  */
 public class WedoDistanceSensorImpl implements DistanceSensor {
 
-    @Inject
     private BlockManager manager;
 
     private String name;
-    /*
+    public WedoDistanceSensorImpl(BlockManager bm) {
+		manager = bm;
+	}
+
+	/*
      * Distance from 148 to 1, where 1 is extremely close and 148 is Infinite... 
      * 147 aprox 20 cm
      */
@@ -41,12 +43,10 @@ public class WedoDistanceSensorImpl implements DistanceSensor {
 
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    @Override
     public String getName() {
         return this.name;
     }

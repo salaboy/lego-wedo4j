@@ -4,27 +4,27 @@
  */
 package com.salaboy.legowedo4j.api;
 
+import com.salaboy.legowedo4j.impl.WeDo.DIRECTION;
+import com.salaboy.legowedo4j.impl.WeDo.Motors;
+
 /**
  *
  * @author salaboy
  */
 public interface Motor {
 
-    public enum DIRECTION {
-        FORWARD, BACKWARD
-    };
 
     void setName(String string);
     
     String getName();
     
-    void forward(int speed, long millisec);
+    void forward(Motors m, int speed, long millisec);
 
-    void backward(int speed, long millisec);
+    void backward(Motors m, int speed, long millisec);
 
-    void start(int speed, DIRECTION dir);
+    void start(Motors m, int speed, DIRECTION dir);
     
-    void stop();
+    void stop(Motors m);
     
     boolean isRunning();
     

@@ -7,7 +7,6 @@ package com.salaboy.legowedo4j.impl;
 import com.salaboy.legowedo4j.api.BlockManager;
 import com.salaboy.legowedo4j.api.Tilt;
 import com.salaboy.legowedo4j.api.TiltSensor;
-import javax.inject.Inject;
 
 /**
  *
@@ -15,12 +14,12 @@ import javax.inject.Inject;
  */
 public class WedoTiltSensorImpl implements TiltSensor {
 
-    @Inject
     private BlockManager manager;
 
     private String name;
 
-    public WedoTiltSensorImpl() {
+    public WedoTiltSensorImpl(BlockManager bm) {
+    	manager = bm;
     }
     
     public synchronized Tilt readTilt() {
@@ -32,9 +31,14 @@ public class WedoTiltSensorImpl implements TiltSensor {
         }
         int tilt = -1;
         
-        //System.out.println("## " + (buff[0] & 0xff) + "," + (buff[1] & 0xff) + "," + (buff[2] & 0xff) + "," + (buff[3] & 0xff) + "," + (buff[4] & 0xff) + "," + (buff[5] & 0xff) + "," + (buff[6] & 0xff) + "," + (buff[7] & 0xff));
+        System.out.println("#### " + (buff[0] & 0xff) + "," + (buff[1] & 0xff) + "," + (buff[2] & 0xff) + "," + (buff[3] & 0xff) + "," + (buff[4] & 0xff) + "," + (buff[5] & 0xff) + "," + (buff[6] & 0xff) + "," + (buff[7] & 0xff));
         if ((buff[3] & 0xff) == 38 || (buff[3] & 0xff) == 39 ) {
             tilt = (buff[2] & 0xff);
+            
+        }
+
+        if ((buff[5] & 0xff) == 38 || (buff[5] & 0xff) == 39 ) {
+            tilt = (buff[4] & 0xff);
             
         }
 
@@ -60,12 +64,10 @@ public class WedoTiltSensorImpl implements TiltSensor {
 
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    @Override
     public String getName() {
         return this.name;
     }
